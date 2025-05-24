@@ -31,27 +31,25 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.green,
         foregroundColor: Colors.white,
       ),
-      body: GridView.builder(
+      body: GridView.custom(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
         ),
-        itemCount: 20,
-        itemBuilder: (context, index) {
-          return Padding(
+        childrenDelegate: SliverChildBuilderDelegate(
+          (context, index) => Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
               color: Colors.green,
               child: Center(
                 child: Text(
-                  "Builder: $index",
+                  "Custom: $index",
                   style: TextStyle(color: Colors.white, fontSize: 30),
                 ),
               ),
             ),
-          );
-        },
+          ),
+          childCount: 10,
+        ),
       ),
     );
   }
