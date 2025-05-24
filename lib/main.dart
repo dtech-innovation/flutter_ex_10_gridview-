@@ -5,6 +5,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,10 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _MyHomePageState createState() => _MyHomePageState();
 }
 
@@ -27,29 +32,28 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("ListView"),
+        title: Text("Grid View"),
         backgroundColor: Colors.green,
         foregroundColor: Colors.white,
       ),
-      body: GridView.custom(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-        ),
-        childrenDelegate: SliverChildBuilderDelegate(
-          (context, index) => Padding(
+      body: GridView.extent(
+        maxCrossAxisExtent: 100,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        children: List.generate(50, (index) {
+          return Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
               color: Colors.green,
               child: Center(
                 child: Text(
-                  "Custom: $index",
-                  style: TextStyle(color: Colors.white, fontSize: 30),
+                  "Extent: $index",
+                  style: TextStyle(color: Colors.white, fontSize: 10),
                 ),
               ),
             ),
-          ),
-          childCount: 10,
-        ),
+          );
+        }),
       ),
     );
   }
